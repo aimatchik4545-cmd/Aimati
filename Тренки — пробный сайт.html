@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Тренки — пробный сайт</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#eef3f6;--surface:#fff;--ink:#12303f;--muted:#51697a;--accent:#0e6e6e;--on-accent:#fff;--line:#cfdbe3;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1c24;--surface:#172833;--ink:#e6f0f5;--muted:#9bb2c0;--accent:#4fc3b8;--on-accent:#06201d;--line:#2a4252}}
+:root[data-theme="dark"]{--bg:#0f1c24;--surface:#172833;--ink:#e6f0f5;--muted:#9bb2c0;--accent:#4fc3b8;--on-accent:#06201d;--line:#2a4252}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1rem/1.6 Manrope,system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:640px;margin:0 auto;padding:2.5rem 1.25rem 3rem}
+h1{font-size:clamp(2.4rem,9vw,3.8rem);line-height:1.02;font-weight:800;letter-spacing:-.03em;margin:0 0 1rem}
+p{margin:0 0 1rem;color:var(--muted);max-width:60ch}
+h2{font-size:1.25rem;margin:2.5rem 0 .75rem}
+.week{display:grid;gap:.5rem}
+.row{display:flex;justify-content:space-between;gap:1rem;padding:.9rem 1rem;background:var(--surface);border:1px solid var(--line);border-radius:10px}
+.row b{font-weight:600}.row span{color:var(--muted)}
+form{display:grid;gap:.75rem;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:1.25rem}
+label{display:grid;gap:.3rem;font-weight:600;font-size:.95rem}
+input,select{font:inherit;padding:.7rem .8rem;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink)}
+button{font:inherit;font-weight:800;padding:.85rem 1rem;border:0;border-radius:8px;background:var(--accent);color:var(--on-accent);cursor:pointer}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+#ok{display:none;padding:1rem;border-radius:10px;border:1px solid var(--accent);color:var(--ink)}
+footer{margin-top:2.5rem;font-size:.85rem;color:var(--muted)}
+</style>
+</head>
+<body>
+<main>
+<h1>Тренки для&nbsp;всех</h1>
+<p>Небольшие групповые тренировки в&nbsp;будни и&nbsp;по&nbsp;выходным. Первое занятие — пробное и&nbsp;бесплатное.</p>
+
+<h2>Расписание</h2>
+<div class="week">
+<div class="row"><b>Понедельник</b><span>19:00 · Силовая</span></div>
+<div class="row"><b>Среда</b><span>19:00 · Кардио</span></div>
+<div class="row"><b>Суббота</b><span>11:00 · Растяжка</span></div>
+</div>
+
+<h2>Записаться на пробное</h2>
+<form id="f">
+<label>Имя<input name="name" required autocomplete="name"></label>
+<label>Телефон или e-mail<input name="contact" required autocomplete="email"></label>
+<label>Занятие
+<select name="slot"><option>Понедельник, 19:00</option><option>Среда, 19:00</option><option>Суббота, 11:00</option></select></label>
+<button type="submit">Записаться</button>
+</form>
+<div id="ok" role="status"></div>
+
+<footer>Пробный сайт · контакты и юридические данные добавьте перед регистрацией</footer>
+</main>
+<script>
+document.getElementById('f').addEventListener('submit',function(e){
+  e.preventDefault();
+  var d=new FormData(e.target),ok=document.getElementById('ok');
+  ok.textContent='Записали: '+d.get('name')+', '+d.get('slot')+'. Мы свяжемся с вами.';
+  ok.style.display='block';e.target.reset();
+});
+</script>
+</body>
+</html>
